@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 const Card = (props) => {
     return (
-        <View style={styles.constainerStyle}>
+        <View style={styles.constainerStyle }>
         {/* just render the jsx child element that is being sent*/}
         {props.children}
         </View>

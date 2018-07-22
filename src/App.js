@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from'redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import firebase from 'firebase';
 import firebaseConfig from '../config/firebase';
+import Router from './Router';
 
 class App extends Component {
     componentWillMount() {
         firebase.initializeApp(firebaseConfig)
     }
     render() {
+        // empty object is where you could send some initial state
+        const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
         return (
-            <Provider store={createStore(reducers)}>
-                <View>
-                    <Text>Hello!!</Text>
-                </View>
+            <Provider store={store}>
+                <Router />
             </Provider>
         )
     }
